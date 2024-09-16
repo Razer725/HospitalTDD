@@ -9,8 +9,13 @@ def test_get_status():
     assert hospital.get_status(1) == "Болен"
 
 
-@pytest.mark.parametrize('patient_id', [10, 2])
-def test_get_status_when_patient_missing(patient_id):
+def test_get_status_when_patient_missing():
+    hospital = Hospital([0, 2])
+    with pytest.raises(PatientMissingError):
+        hospital.get_status(10)
+
+
+def test_get_status_when_patient_discharged():
     hospital = Hospital([0, None, 2])
     with pytest.raises(PatientMissingError):
-        hospital.get_status(patient_id)
+        hospital.get_status(2)
