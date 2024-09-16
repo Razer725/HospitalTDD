@@ -5,3 +5,6 @@ class Hospital:
         if patients is None:
             patients = [1] * 200
         self.patients = patients
+
+    def get_status(self, patient_id):
+        return self.STATUSES[self.patients[patient_id - 1]]
