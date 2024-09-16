@@ -1,0 +1,2 @@
+class PatientMissingError(Exception):
+    pass

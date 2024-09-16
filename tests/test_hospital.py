@@ -1,5 +1,6 @@
 import pytest
 
+from exceptions import PatientMissingError
 from hospital import Hospital
 
 
