@@ -11,6 +11,8 @@ class Hospital:
 
     def get_status(self, patient_id):
         inner_id = self._convert_patient_id_to_inner_id(patient_id)
+        if self.patients[inner_id] is None:
+            raise PatientMissingError
         return self.STATUSES[self.patients[inner_id]]
 
     def _convert_patient_id_to_inner_id(self, patient_id):
