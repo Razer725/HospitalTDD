@@ -1,4 +1,4 @@
-from exceptions import PatientMissingError
+from exceptions import PatientMissingError, StatusUpError
 
 
 class Hospital:
@@ -22,4 +22,6 @@ class Hospital:
 
     def status_up(self, patient_id):
         inner_id = self._convert_patient_id_to_inner_id(patient_id)
+        if self.patients[inner_id] == max(self.STATUSES):
+            raise StatusUpError
         self.patients[inner_id] += 1
