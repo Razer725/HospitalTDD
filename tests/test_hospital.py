@@ -19,3 +19,9 @@ def test_get_status_when_patient_discharged():
     hospital = Hospital([0, None, 2])
     with pytest.raises(PatientMissingError):
         hospital.get_status(2)
+
+
+def test_status_up():
+    hospital = Hospital([0, 2])
+    hospital.status_up(1)
+    assert hospital.patients == [1, 2]
