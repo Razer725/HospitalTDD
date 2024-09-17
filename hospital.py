@@ -25,3 +25,11 @@ class Hospital:
         if self.patients[inner_id] == max(self.STATUSES):
             raise StatusUpError
         self.patients[inner_id] += 1
+
+    def can_status_up(self, patient_id):
+        inner_id = self._convert_patient_id_to_inner_id(patient_id)
+        return max(self.STATUSES) != self.patients[inner_id]
+
+    def discharge(self, patient_id):
+        inner_id = self._convert_patient_id_to_inner_id(patient_id)
+        self.patients[inner_id] = None
