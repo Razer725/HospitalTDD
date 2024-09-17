@@ -23,6 +23,8 @@ class HospitalCommands:
             new_status = self.hospital.get_status(patient_id)
             self.dialog_with_user.send_message(f'Новый статус пациента: "{new_status}"')
         else:
-            if self.dialog_with_user.request_discharge_confirmation:
+            if self.dialog_with_user.request_discharge_confirmation():
                 self.hospital.discharge(patient_id)
                 self.dialog_with_user.send_message('Пациент выписан из больницы')
+            else:
+                self.dialog_with_user.send_message('Пациент остался в статусе "Готов к выписке"')
