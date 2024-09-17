@@ -31,3 +31,5 @@ class HospitalCommands:
                     self.dialog_with_user.send_message('Пациент остался в статусе "Готов к выписке"')
         except PatientIDTypeError:
             self.dialog_with_user.send_message("Ошибка. ID пациента должно быть числом (целым, положительным)")
+        except PatientMissingError:
+            self.dialog_with_user.send_message("Ошибка. В больнице нет пациента с таким ID")
