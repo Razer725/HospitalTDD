@@ -3,3 +3,6 @@ class PatientMissingError(Exception):
 
 class StatusUpError(Exception):
     pass
+
+class PatientIDTypeError(Exception):
+    pass
