@@ -24,3 +24,5 @@ def test_get_status_when_id_type_invalid():
 
     with pytest.raises(PatientIDTypeError):
         hospital_commands.get_status()
+
+    dialog_with_user.send_message.assert_called_once_with("Ошибка. ID пациента должно быть числом (целым, положительным)")
