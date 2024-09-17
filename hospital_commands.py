@@ -17,14 +17,17 @@ class HospitalCommands:
             self.dialog_with_user.send_message("Ошибка. В больнице нет пациента с таким ID")
 
     def status_up(self):
-        patient_id = self.dialog_with_user.request_patient_id()
-        if self.hospital.can_status_up(patient_id):
-            self.hospital.status_up(patient_id)
-            new_status = self.hospital.get_status(patient_id)
-            self.dialog_with_user.send_message(f'Новый статус пациента: "{new_status}"')
-        else:
-            if self.dialog_with_user.request_discharge_confirmation():
-                self.hospital.discharge(patient_id)
-                self.dialog_with_user.send_message('Пациент выписан из больницы')
+        try:
+            patient_id = self.dialog_with_user.request_patient_id()
+            if self.hospital.can_status_up(patient_id):
+                self.hospital.status_up(patient_id)
+                new_status = self.hospital.get_status(patient_id)
+                self.dialog_with_user.send_message(f'Новый статус пациента: "{new_status}"')
             else:
-                self.dialog_with_user.send_message('Пациент остался в статусе "Готов к выписке"')
+                if self.dialog_with_user.request_discharge_confirmation():
+                    self.hospital.discharge(patient_id)
+                    self.dialog_with_user.send_message('Пациент выписан из больницы')
+                else:
+                    self.dialog_with_user.send_message('Пациент остался в статусе "Готов к выписке"')
+        except PatientIDTypeError:
+            self.dialog_with_user.send_message("Ошибка. ID пациента должно быть числом (целым, положительным)")
