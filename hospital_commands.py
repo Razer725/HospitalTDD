@@ -1,4 +1,4 @@
-from exceptions import PatientIDTypeError
+from exceptions import PatientIDTypeError, PatientMissingError
 
 
 class HospitalCommands:
@@ -13,3 +13,5 @@ class HospitalCommands:
             self.dialog_with_user.send_message(status)
         except PatientIDTypeError:
             self.dialog_with_user.send_message("Ошибка. ID пациента должно быть числом (целым, положительным)")
+        except PatientMissingError:
+            self.dialog_with_user.send_message("Ошибка. В больнице нет пациента с таким ID")
