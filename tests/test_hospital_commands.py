@@ -1,5 +1,6 @@
 from unittest.mock import MagicMock
 
+from hospital_commands import HospitalCommands
 from hospital import Hospital
 
 
