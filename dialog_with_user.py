@@ -9,4 +9,6 @@ class DialogWithUser:
 
         return int(patient_id)
 
-
+    def request_discharge_confirmation(self):
+        user_answer = input("Желаете этого клиента выписать? (да/нет): ")
+        return user_answer in ('yes', 'да')
