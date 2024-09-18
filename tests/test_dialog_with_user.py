@@ -38,3 +38,9 @@ def test_send_message(capfd):
     dialog_with_user = DialogWithUser()
     dialog_with_user.send_message('Статус пациента: "Болен"')
     assert capfd.readouterr().out == 'Статус пациента: "Болен"\n'
+
+
+def test_send_status(capfd):
+    dialog_with_user = DialogWithUser()
+    dialog_with_user.send_status("Болен")
+    assert capfd.readouterr().out == 'Статус пациента: "Болен"\n'
