@@ -32,3 +32,9 @@ def test_request_discharge_confirmation_when_answer_negative(monkeypatch, user_i
     monkeypatch.setattr('builtins.input', lambda _: user_input)
     dialog_with_user = DialogWithUser()
     assert not dialog_with_user.request_discharge_confirmation()
+
+
+def test_send_message(capfd):
+    dialog_with_user = DialogWithUser()
+    dialog_with_user.send_message('Статус пациента: "Болен"')
+    assert capfd.readouterr().out == 'Статус пациента: "Болен"\n'
