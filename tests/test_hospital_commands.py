@@ -70,7 +70,7 @@ def test_status_up_with_max_status_when_discharge_declined():
 
     hospital_commands.status_up()
     assert hospital.patients == [1, 3]
-    dialog_with_user.send_message.assert_called_once_with('Пациент остался в статусе "Готов к выписке"')
+    dialog_with_user.send_status_not_changed.assert_called_once()
 
 
 def test_status_up_when_id_type_invalid():
