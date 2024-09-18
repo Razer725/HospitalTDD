@@ -46,7 +46,7 @@ def test_status_up():
 
     hospital_commands.status_up()
     assert hospital.patients == [2, 3]
-    dialog_with_user.send_message.assert_called_once_with('Новый статус пациента: "Слегка болен"')
+    dialog_with_user.send_new_status.assert_called_once_with("Слегка болен")
 
 
 def test_status_up_with_max_status_when_discharge_confirmed():
