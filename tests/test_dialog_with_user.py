@@ -21,7 +21,14 @@ def test_request_patient_id_wit_invalid_type(monkeypatch, user_input):
 
 
 @pytest.mark.parametrize('user_input', ['да', 'yes'])
-def test_request_discharge_confirmation(monkeypatch, user_input):
+def test_request_discharge_confirmation_when_answer_positive(monkeypatch, user_input):
     monkeypatch.setattr('builtins.input', lambda _: user_input)
     dialog_with_user = DialogWithUser()
     assert dialog_with_user.request_discharge_confirmation()
+
+
+@pytest.mark.parametrize('user_input', ['нет', 'no'])
+def test_request_discharge_confirmation_when_answer_negative(monkeypatch, user_input):
+    monkeypatch.setattr('builtins.input', lambda _: user_input)
+    dialog_with_user = DialogWithUser()
+    assert not dialog_with_user.request_discharge_confirmation()
