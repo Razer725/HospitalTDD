@@ -14,7 +14,7 @@ def test_get_status():
     dialog_with_user.request_patient_id = MagicMock(return_value=1)
 
     hospital_commands.get_status()
-    dialog_with_user.send_message.assert_called_once_with("Болен")
+    dialog_with_user.send_status.assert_called_once_with("Болен")
 
 
 def test_get_status_when_id_type_invalid():
