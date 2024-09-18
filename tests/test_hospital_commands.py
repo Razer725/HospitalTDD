@@ -58,7 +58,7 @@ def test_status_up_with_max_status_when_discharge_confirmed():
 
     hospital_commands.status_up()
     assert hospital.patients == [1, None]
-    dialog_with_user.send_message.assert_called_once_with('Пациент выписан из больницы')
+    dialog_with_user.send_discharged.assert_called_once()
 
 
 def test_status_up_with_max_status_when_discharge_declined():
