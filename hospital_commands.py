@@ -26,7 +26,7 @@ class HospitalCommands:
             else:
                 if self.dialog_with_user.request_discharge_confirmation():
                     self.hospital.discharge(patient_id)
-                    self.dialog_with_user.send_message('Пациент выписан из больницы')
+                    self.dialog_with_user.send_discharged()
                 else:
                     self.dialog_with_user.send_message('Пациент остался в статусе "Готов к выписке"')
         except PatientIDTypeError:
