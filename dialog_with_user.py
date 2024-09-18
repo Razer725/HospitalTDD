@@ -15,3 +15,6 @@ class DialogWithUser:
 
     def send_message(self, message):
         print(message)
+
+    def send_status(self, status):
+        self.send_message(f'Статус пациента: "{status}"')
