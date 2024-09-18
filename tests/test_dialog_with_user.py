@@ -18,3 +18,10 @@ def test_request_patient_id_wit_invalid_type(monkeypatch, user_input):
     dialog_with_user = DialogWithUser()
     with pytest.raises(PatientIDTypeError):
         dialog_with_user.request_patient_id()
+
+
+@pytest.mark.parametrize('user_input', ['да', 'yes'])
+def test_request_discharge_confirmation(monkeypatch, user_input):
+    monkeypatch.setattr('builtins.input', lambda _: user_input)
+    dialog_with_user = DialogWithUser()
+    assert dialog_with_user.request_discharge_confirmation()
