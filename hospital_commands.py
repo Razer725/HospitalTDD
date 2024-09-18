@@ -10,7 +10,7 @@ class HospitalCommands:
         try:
             patient_id = self.dialog_with_user.request_patient_id()
             status = self.hospital.get_status(patient_id)
-            self.dialog_with_user.send_message(status)
+            self.dialog_with_user.send_status(status)
         except PatientIDTypeError:
             self.dialog_with_user.send_message("Ошибка. ID пациента должно быть числом (целым, положительным)")
         except PatientMissingError:
