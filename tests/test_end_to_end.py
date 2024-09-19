@@ -1,6 +1,8 @@
+from application import Application
 from dialog_with_user import DialogWithUser
 from hospital import Hospital
 from hospital_commands import HospitalCommands
+from mock_console import MockConsole
 
 
 def test_discharge():
