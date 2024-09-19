@@ -1,7 +1,5 @@
 from unittest.mock import MagicMock
 
-import pytest
-
 from exceptions import PatientIDTypeError, PatientMissingError
 from hospital_commands import HospitalCommands
 from hospital import Hospital

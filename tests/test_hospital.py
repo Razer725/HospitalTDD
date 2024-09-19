@@ -26,7 +26,14 @@ def test_status_up():
     hospital.status_up(1)
     assert hospital.patients == [1, 2]
 
+
 def test_status_up_when_status_max():
     hospital = Hospital([3, 0])
     with pytest.raises(StatusUpError):
         hospital.status_up(1)
+
+
+def test_discharge():
+    hospital = Hospital([0, 2])
+    hospital.discharge(1)
+    assert hospital.patients == [None, 2]

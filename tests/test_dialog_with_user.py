@@ -1,5 +1,3 @@
-from unittest.mock import patch
-
 import pytest
 
 from dialog_with_user import DialogWithUser
