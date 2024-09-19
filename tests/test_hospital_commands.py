@@ -2,7 +2,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from exceptions import PatientIDTypeError, PatientMissingError
+from exceptions import PatientIDTypeError
 from hospital_commands import HospitalCommands
 from hospital import Hospital
 
@@ -32,7 +32,7 @@ def test_get_status_when_patient_missing():
     dialog_with_user = MagicMock()
     hospital = Hospital([1, 3])
     hospital_commands = HospitalCommands(hospital, dialog_with_user)
-    dialog_with_user.request_patient_id = MagicMock(side_effect=PatientMissingError)
+    dialog_with_user.request_patient_id = MagicMock(return_value=10)
 
     hospital_commands.get_status()
     dialog_with_user.send_message.assert_called_once_with("Ошибка. В больнице нет пациента с таким ID")
@@ -89,7 +89,7 @@ def test_status_up_when_patient_missing():
     dialog_with_user = MagicMock()
     hospital = Hospital([1, 3])
     hospital_commands = HospitalCommands(hospital, dialog_with_user)
-    dialog_with_user.request_patient_id = MagicMock(side_effect=PatientMissingError)
+    dialog_with_user.request_patient_id = MagicMock(return_value=10)
 
     hospital_commands.status_up()
     assert hospital.patients == [1, 3]
@@ -116,3 +116,14 @@ def test_discharge_when_patient_missing():
     hospital_commands.discharge()
     assert hospital.patients == [1, 3]
     dialog_with_user.send_message.assert_called_once_with("Ошибка. В больнице нет пациента с таким ID")
+
+
+def test_discharge_when_id_type_invalid():
+    dialog_with_user = MagicMock()
+    hospital = Hospital([1, 3])
+    hospital_commands = HospitalCommands(hospital, dialog_with_user)
+    dialog_with_user.request_patient_id = MagicMock(side_effect=PatientIDTypeError)
+
+    hospital_commands.discharge()
+    assert hospital.patients == [1, 3]
+    dialog_with_user.send_message.assert_called_once_with("Ошибка. ID пациента должно быть числом (целым, положительным)")
