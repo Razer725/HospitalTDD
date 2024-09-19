@@ -78,6 +78,7 @@ def test_status_up_when_id_type_invalid():
     dialog_with_user.request_patient_id = MagicMock(side_effect=PatientIDTypeError)
 
     hospital_commands.status_up()
+    assert hospital.patients == [1, 3]
     dialog_with_user.send_message.assert_called_once_with(
         "Ошибка. ID пациента должно быть числом (целым, положительным)")
 
@@ -89,4 +90,16 @@ def test_status_up_when_patient_missing():
     dialog_with_user.request_patient_id = MagicMock(side_effect=PatientMissingError)
 
     hospital_commands.status_up()
+    assert hospital.patients == [1, 3]
     dialog_with_user.send_message.assert_called_once_with("Ошибка. В больнице нет пациента с таким ID")
+
+
+def test_discharge():
+    dialog_with_user = MagicMock()
+    hospital = Hospital([1, 3])
+    hospital_commands = HospitalCommands(hospital, dialog_with_user)
+    dialog_with_user.request_patient_id = MagicMock(return_value=1)
+
+    hospital_commands.discharge()
+    assert hospital.patients == [None, 3]
+    dialog_with_user.send_discharged.assert_called_once()
