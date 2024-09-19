@@ -37,3 +37,9 @@ def test_discharge():
     hospital = Hospital([0, 2])
     hospital.discharge(1)
     assert hospital.patients == [None, 2]
+
+
+def test_discharge_when_patient_missing():
+    hospital = Hospital([0, 2])
+    with pytest.raises(PatientMissingError):
+        hospital.discharge(10)
