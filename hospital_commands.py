@@ -35,6 +35,11 @@ class HospitalCommands:
             self.dialog_with_user.send_message("Ошибка. В больнице нет пациента с таким ID")
 
     def discharge(self):
-        patient_id = self.dialog_with_user.request_patient_id()
-        self.hospital.discharge(patient_id)
-        self.dialog_with_user.send_discharged()
+        try:
+            patient_id = self.dialog_with_user.request_patient_id()
+            self.hospital.discharge(patient_id)
+            self.dialog_with_user.send_discharged()
+        except PatientMissingError:
+            self.dialog_with_user.send_message("Ошибка. В больнице нет пациента с таким ID")
+        except PatientIDTypeError:
+            self.dialog_with_user.send_message("Ошибка. ID пациента должно быть числом (целым, положительным)")
